@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!-- Background image -->
+<div
+  class="mx-auto bg-image p-5 text-center shadow-1-strong rounded mb-1 text-white"
+  style="background-image: url('https://argonaut.au.reastatic.net/resi-property/prod/homepage-web/web_lrg-7256e6b0174e3eb40292.webp');
+  height: 85vh;
+  width: 95vw;
+  background-position:bottom"
+  
+>
+  <h1 class="mb-3 h2">Search for properties</h1>
+    <div class="mx-auto bg-light border rounded-pill  h-25 w-50">
+        <form>
+            <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" >
+            <label class="bg-danger mt-1 btn btn-secondary" for="option1">Rent</label>
+
+            <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+            <label class="bg-danger mt-1 btn btn-secondary" for="option2">Sell</label>
+
+            <br></br>
+            <input type="email" class="form-control border-0 mx-auto w-75" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter address">
+            <button type="submit" class="btn btn-danger">Submit</button>
+        </form>
+    </div>
+</div>
+
