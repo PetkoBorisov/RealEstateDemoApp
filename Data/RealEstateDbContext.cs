@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RealEstateDemoApp.Data.Models;
 
 namespace RealEstateDemoApp.Data
 {
@@ -9,5 +10,8 @@ namespace RealEstateDemoApp.Data
             : base(options)
         {
         }
+
+
+        public DbSet<Listing> Listings { get; set; }
     }
 }

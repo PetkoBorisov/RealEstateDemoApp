@@ -1,6 +1,30 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Listings";
 }
-<h1>@ViewData["Title"]</h1>
+<h1 class="text-center">@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+
+
+
+<div class="card-deck text-center">
+
+    @for(int i=0;i<10;i++){
+        <div class="card w-25 m-3 d-inline-block">
+    <img class="card-img-top" src="https://media.istockphoto.com/photos/beautiful-luxury-home-exterior-at-twilight-picture-id1026205392?k=20&m=1026205392&s=612x612&w=0&h=lYFMV5cOuQQpddmwsE5QLBCyhgWQ1OI46i_dalro9OE=" alt="Card image cap">
+    <div class="card-img-overlay">
+    <div class="w-25 bg-danger rounded-pill text-center"><span class="badge badge-danger">House</span></div>
+  </div>
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <a href="#" class="btn btn-danger stretched-link">Details</a>
+    </div>
+  </div>
+
+
+    }
+
+  
+ 
+</div>
