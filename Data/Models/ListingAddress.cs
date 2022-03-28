@@ -1,7 +1,10 @@
-﻿namespace RealEstateDemoApp.Data.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace RealEstateDemoApp.Data.Models
 {
-    public class Address
+    public class ListingAddress
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? City { get; set; }
         public string? Street { get; set; }
@@ -12,6 +15,6 @@
         public int? AllFloor { get; set; }
         public int? Floor { get; set; }
 
-        
+       
     }
 }

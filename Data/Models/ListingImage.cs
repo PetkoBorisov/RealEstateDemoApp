@@ -2,13 +2,12 @@
 
 namespace RealEstateDemoApp.Data.Models
 {
-    public class PropertyType
+    public class ListingImage
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string? Name { get; set; }
-
-        public List<Listing>? Listings { get; set; }
-
+        public string? Url { get; set; }
+        public int ListingId { get; set; }
+        public Listing? Listing { get; set; }
     }
 }
