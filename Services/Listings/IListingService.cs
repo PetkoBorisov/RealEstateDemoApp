@@ -2,7 +2,7 @@
 {
     public interface IListingService
     {
-        void Create(
+        int Create(
             int sellerId,
             int listingAddressId,
             decimal price,

@@ -1,23 +1,35 @@
-﻿using RealEstateDemoApp.Data.Models;
+﻿using RealEstateDemoApp.Data;
+using RealEstateDemoApp.Data.Models;
 
 namespace RealEstateDemoApp.Services.Listings
 {
     public class ListingService : IListingService
     {
-        public void Create(int sellerId, int listingAddressId, decimal price,
+        private readonly RealEstateDbContext _data;
+
+        public ListingService(RealEstateDbContext data)
+        {
+            this._data = data;
+        }
+
+        public int Create(int sellerId, int listingAddressId, decimal price,
             int propertyTypeId, string outdoorFeatures, string indoorFeatures,
             string climateControl, string status, int bedrooms,
             int bathrooms, int listingTypeId, int carSpaces,
             int landSize, List<string> imageUrls)
         {
             List<ListingImage> images = new();
-           foreach(var url in imageUrls)
-           {
-                images.Add(new ListingImage {
-                    Url = url,
-                });
+            if (imageUrls.Any())
+            {
+                foreach (var url in imageUrls)
+                {
+                    images.Add(new ListingImage
+                    {
+                        Url = url,
+                    });
 
-           }
+                }
+            }
 
             var data = new Listing
             {
@@ -36,6 +48,9 @@ namespace RealEstateDemoApp.Services.Listings
                 LandSize = landSize,
                 Images = images
             };
+            this._data.Listings.Add(data);
+            this._data.SaveChanges();
+            return data.Id;
         }
     }
 }

@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RealEstateDemoApp.Data;
 using RealEstateDemoApp.Infrastructure.Extensions;
+using RealEstateDemoApp.Services.Addresses;
+using RealEstateDemoApp.Services.Listings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +16,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<RealEstateDbContext>();
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddTransient<IListingService, ListingService>();
+builder.Services.AddTransient<IAddressService, AddressService>();
 var app = builder.Build();
     app.PrepareDatabase();
 // Configure the HTTP request pipeline.
