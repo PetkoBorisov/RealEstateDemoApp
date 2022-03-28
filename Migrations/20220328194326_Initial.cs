@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RealEstateDemoApp.Migrations
 {
-    public partial class Intitial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -214,6 +214,7 @@ namespace RealEstateDemoApp.Migrations
                     OutdoorFeatures = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IndoorFeatures = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClimateControl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Bedrooms = table.Column<int>(type: "int", nullable: false),
                     Bathrooms = table.Column<int>(type: "int", nullable: false),

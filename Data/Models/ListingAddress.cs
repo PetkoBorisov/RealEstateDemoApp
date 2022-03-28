@@ -16,6 +16,9 @@ namespace RealEstateDemoApp.Data.Models
         public int? AllFloor { get; set; }
         public int? Floor { get; set; }
 
-       
+        public override string ToString()
+        {
+            return $"{Country}, {City}, {Neighborhood}, {Street}, {PostCode}";
+        }
     }
 }

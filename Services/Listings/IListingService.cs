@@ -1,4 +1,6 @@
-﻿namespace RealEstateDemoApp.Services.Listings
+﻿using RealEstateDemoApp.Data.Models;
+
+namespace RealEstateDemoApp.Services.Listings
 {
     public interface IListingService
     {
@@ -11,6 +13,7 @@
             string indoorFeatures,
             string climateControl,
             string status,
+            string description,
             int bedrooms,
             int bathrooms,
             int listingTypeId,
@@ -18,6 +21,9 @@
             int landSize,
             List<string> imageUrls
             );
+
+        List<Listing> All();
+       
     }
 }
 

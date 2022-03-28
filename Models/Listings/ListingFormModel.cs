@@ -14,6 +14,7 @@ namespace RealEstateDemoApp.Models.Listings
         public string? Images { get; set; }
         public string? ClimateControl { get; set; }
         public string? Status { get; set; }
+        public string? Description { get; set; }
         public int Bedrooms { get; set; }
         public int Bathrooms { get; set; }
         public int CarSpaces { get; set; }

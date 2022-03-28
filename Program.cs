@@ -18,8 +18,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IListingService, ListingService>();
 builder.Services.AddTransient<IAddressService, AddressService>();
+
 var app = builder.Build();
     app.PrepareDatabase();
+    
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

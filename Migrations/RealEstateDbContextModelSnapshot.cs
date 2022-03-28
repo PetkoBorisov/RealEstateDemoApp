@@ -244,6 +244,9 @@ namespace RealEstateDemoApp.Migrations
                     b.Property<string>("ClimateControl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IndoorFeatures")
                         .HasColumnType("nvarchar(max)");
 

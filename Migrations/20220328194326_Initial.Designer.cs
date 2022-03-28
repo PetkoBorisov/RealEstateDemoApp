@@ -12,8 +12,8 @@ using RealEstateDemoApp.Data;
 namespace RealEstateDemoApp.Migrations
 {
     [DbContext(typeof(RealEstateDbContext))]
-    [Migration("20220328162505_Intitial")]
-    partial class Intitial
+    [Migration("20220328194326_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -244,6 +244,9 @@ namespace RealEstateDemoApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ClimateControl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IndoorFeatures")

@@ -13,6 +13,7 @@ namespace RealEstateDemoApp.Data.Models
         public string? OutdoorFeatures { get; set; }
         public string? IndoorFeatures { get; set; }
         public string? ClimateControl { get; set; }
+        public string? Description { get; set; }
         public string? Status { get; set; }
         public int Bedrooms { get; set; }
         public int Bathrooms { get; set; }

@@ -1,4 +1,5 @@
-﻿using RealEstateDemoApp.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using RealEstateDemoApp.Data;
 using RealEstateDemoApp.Data.Models;
 
 namespace RealEstateDemoApp.Services.Listings
@@ -12,9 +13,14 @@ namespace RealEstateDemoApp.Services.Listings
             this._data = data;
         }
 
+        public List<Listing> All()
+        {
+            return _data.Listings.Include(x => x.ListingAddress).Include(x=>x.Images).ToList();
+        }
+
         public int Create(int sellerId, int listingAddressId, decimal price,
             int propertyTypeId, string outdoorFeatures, string indoorFeatures,
-            string climateControl, string status, int bedrooms,
+            string climateControl, string status, string description, int bedrooms,
             int bathrooms, int listingTypeId, int carSpaces,
             int landSize, List<string> imageUrls)
         {
@@ -46,7 +52,8 @@ namespace RealEstateDemoApp.Services.Listings
                 ListingTypeId = listingTypeId,
                 CarSpaces = carSpaces,
                 LandSize = landSize,
-                Images = images
+                Images = images,
+                Description = description
             };
             this._data.Listings.Add(data);
             this._data.SaveChanges();

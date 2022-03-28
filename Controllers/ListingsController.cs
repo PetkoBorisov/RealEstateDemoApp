@@ -9,6 +9,7 @@ namespace RealEstateDemoApp.Controllers
     {
         IListingService _listings;
         IAddressService _address;
+        
         public ListingsController(IListingService listings,
             IAddressService address)
         {
@@ -33,12 +34,19 @@ namespace RealEstateDemoApp.Controllers
             var listingAddressId = this._address.Create(data.Country, data.City, data.Street, data.PostCode, data.Neighborhood
                 , data.Entrance, data.Flat, data.AllFloors, data.Floor);
             var listingId = this._listings.Create('0', listingAddressId, data.Price, data.PropertyTypeId, data.OutdoorFeatures
-                , data.IndoorFeatures, data.ClimateControl, data.Status, data.Bedrooms, data.Bathrooms, data.ListingTypeId,
+                , data.IndoorFeatures, data.ClimateControl, data.Status,data.Description, data.Bedrooms, data.Bathrooms, data.ListingTypeId,
                 data.CarSpaces, data.LandSize,images);
 
            
 
-            return View();
+            return RedirectToAction("All","Listings");
+        }
+
+
+        public IActionResult All()
+        {
+            var data = _listings.All();
+            return View(data);
         }
     }
 }

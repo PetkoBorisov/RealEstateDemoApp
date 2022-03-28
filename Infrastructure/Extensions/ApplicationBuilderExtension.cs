@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RealEstateDemoApp.Data;
+using RealEstateDemoApp.Data.Models;
 
 namespace RealEstateDemoApp.Infrastructure.Extensions
 {
@@ -10,34 +11,48 @@ namespace RealEstateDemoApp.Infrastructure.Extensions
         {
             using var serviceScope = app.ApplicationServices.CreateScope();
             var services = serviceScope.ServiceProvider;
-
+            
             MigrateDatabase(services);
-
+            SeedListingTypes(services);
+            SeedListingTypes(services);
             return app;
         }
 
-        //private static void SeedCategories(IServiceProvider services)
-        //{
-        //    var data = services.GetRequiredService<CarRentingDbContext>();
+        private static void SeedPropertyTypes(IServiceProvider services)
+        {
+            var data = services.GetRequiredService<RealEstateDbContext>();
 
-        //    if (data.Categories.Any())
-        //    {
-        //        return;
-        //    }
+            if (data.PropertyTypes.Any())
+            {
+                return;
+            }
 
-        //    data.Categories.AddRange(new[]
-        //    {
-        //        new Category { Name = "Mini" },
-        //        new Category { Name = "Economy" },
-        //        new Category { Name = "Midsize" },
-        //        new Category { Name = "Large" },
-        //        new Category { Name = "SUV" },
-        //        new Category { Name = "Vans" },
-        //        new Category { Name = "Luxury" },
-        //    });
+            data.PropertyTypes.AddRange(new[]
+            {
+                new PropertyType { Name = "House" },
+                new PropertyType { Name = "Apartment & Unit" },
+            });
 
-        //    data.SaveChanges();
-        //}
+            data.SaveChanges();
+        }
+
+        private static void SeedListingTypes(IServiceProvider services)
+        {
+            var data = services.GetRequiredService<RealEstateDbContext>();
+
+            if (data.ListingTypes.Any())
+            {
+                return;
+            }
+
+            data.ListingTypes.AddRange(new[]
+            {
+                new ListingType { Name = "Rent" },
+                new ListingType { Name = "Sell" }
+            });
+
+            data.SaveChanges();
+        }
 
 
 
