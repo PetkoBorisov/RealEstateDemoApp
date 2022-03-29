@@ -11,11 +11,12 @@
         <div class="card w-25 m-3 d-inline-block">
     <img class="card-img-top" src="@listing.Images.FirstOrDefault().Url" alt="Card image cap">
     <div class="card-img-overlay">
-    <div class="w-25 bg-danger rounded-pill text-center"><span class="badge badge-danger">House</span></div>
+    <div class="w-25 bg-danger rounded-pill text-center"><span class="badge badge-danger">@listing.PropertyType.Name</span></div>
+    <div class="w-25 bg-warning rounded-pill text-center"><span class="badge badge-warning">@listing.ListingType.Name</span></div>
   </div>
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">@listing.ListingAddress.ToString()</p>
+      <h5 class="card-title">@listing.ListingAddress.ToString()</h5>
+      <p class="card-text"><i class="fa fa-bed mx-3">@listing.Bedrooms</i><i class="fa fa-shower mx-3">@listing.Bathrooms</i><i class="fa fa-car mx-3">@listing.CarSpaces</i></p>
       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       <a href="#" class="btn btn-danger stretched-link">Details</a>
     </div>

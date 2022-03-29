@@ -13,7 +13,7 @@ namespace RealEstateDemoApp.Infrastructure.Extensions
             var services = serviceScope.ServiceProvider;
             
             MigrateDatabase(services);
-            SeedListingTypes(services);
+            SeedPropertyTypes(services);
             SeedListingTypes(services);
             return app;
         }
@@ -30,7 +30,7 @@ namespace RealEstateDemoApp.Infrastructure.Extensions
             data.PropertyTypes.AddRange(new[]
             {
                 new PropertyType { Name = "House" },
-                new PropertyType { Name = "Apartment & Unit" },
+                new PropertyType { Name = "Apartment" },
             });
 
             data.SaveChanges();

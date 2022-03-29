@@ -15,7 +15,7 @@ namespace RealEstateDemoApp.Services.Listings
 
         public List<Listing> All()
         {
-            return _data.Listings.Include(x => x.ListingAddress).Include(x=>x.Images).ToList();
+            return _data.Listings.Include(x => x.ListingAddress).Include(x=>x.Images).Include(x=>x.PropertyType).Include(x=>x.ListingType).ToList();
         }
 
         public int Create(int sellerId, int listingAddressId, decimal price,
