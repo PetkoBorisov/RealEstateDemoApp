@@ -1,28 +1,115 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<!-- Background image -->
-<div
-  class="mx-auto bg-image p-5 text-center shadow-1-strong rounded mb-1 text-white"
-  style="background-image: url('https://argonaut.au.reastatic.net/resi-property/prod/homepage-web/web_lrg-7256e6b0174e3eb40292.webp');
-  height: 85vh;
-  width: 95vw;
-  background-position:bottom"
-  
->
-  <h1 class="mb-3 h2">Search for properties</h1>
-    <div class="mx-auto bg-light border rounded-pill  h-25 w-50">
-        <form>
-            <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" >
-            <label class="bg-danger mt-1 btn btn-secondary" for="option1">Rent</label>
+@model AllListingsQueryModel
 
-            <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
-            <label class="bg-danger mt-1 btn btn-secondary" for="option2">Sell</label>
-
-            <br></br>
-            <input type="email" class="form-control border-0 mx-auto w-75" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter address">
-            <button type="submit" class="btn btn-danger">Submit</button>
-        </form>
+<form asp-action="All" asp-controller="Listings" method="get" class="w-25 mx-auto">
+ <select asp-for="PropertyTypeId" class="form-select" aria-label="Select property type">
+  <option selected>Select property type</option>
+   <option value="0">Any</option>
+  <option value="1">House</option>
+  <option value="2">Flat</option>
+</select>
+ <hr>
+<select asp-for="ListingTypeId" class="form-select" aria-label="Select listing type">
+  <option selected>Select listing type</option>
+  <option value="0">Any</option>
+  <option value="1">Rent</option>
+  <option value="2">Sell</option>
+</select>
+   <hr>
+  <div class="form-group">
+    <label asp-for="PriceFrom">Price from</label>
+    <input asp-for="PriceFrom" type="number" class="form-control" placeholder="0.00$">
+  </div>
+    <hr>
+     <div class="form-group">
+    <label asp-for="PriceTo">Price to</label>
+    <input asp-for="PriceTo" type="number" class="form-control" placeholder="0.00$">
+  </div>
+    <hr>
+  <div class="form-group">
+    <label asp-for="Country">Country</label>
+    <input asp-for="Country" type="text" class="form-control" placeholder="Bulgaria,Romania...">
+  </div>
+   <hr>
+  <div class="form-group">
+    <label asp-for="City">City</label>
+    <input asp-for="City" type="text" class="form-control" placeholder="Varna,Shumen...">
+  </div>
+  <hr>
+  <div class="form-group">
+    <label asp-for="Bedrooms">Bedrooms</label>
+    <input asp-for="Bedrooms" type="number" class="form-control" placeholder="0">
+  </div>
+ <hr>
+  <div class="form-group">
+    <label asp-for="Bathrooms" >Bathrooms</label>
+    <input asp-for="Bathrooms" type="number" class="form-control"placeholder="0">
+  </div>
+   <hr>
+  <div class="form-group">
+    <label asp-for="CarSpaces">CarSpaces</label>
+    <input asp-for="CarSpaces" type="number" class="form-control" placeholder="0">
+  </div>
+   <hr>
+  <div class="form-group">
+    <label asp-for="LandSizeFrom">LandSize from</label>
+    <input asp-for="LandSizeFrom" type="number" class="form-control" placeholder="0.00m/2">
+  </div>
+  <hr>
+   <div class="form-group">
+    <label asp-for="LandSizeTo">LandSize to</label>
+    <input asp-for="LandSizeTo" type="number" class="form-control" placeholder="0.00m/2">
+  </div>
+  <hr>
+    <h4>Status</h4>
+  <div class="form-check form-check-inline">
+    <input asp-for="Status" type="radio" name="status" value="New" class="custom-control-input"  >
+    <label  asp-for="Status" class="form-check-label">New</label>
     </div>
-</div>
+    <div class="form-check form-check-inline">
+    <input asp-for="Status" type="radio" name="status" value="Established" class="custom-control-input" >
+    <label asp-for="Status"  class="form-check-label" >Established</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input asp-for="Status" type="radio" name="status" value="" class="custom-control-input" >
+    <label asp-for="Status"  class="form-check-label" >Any</label>
+  </div>
+  <hr>
+  <h4>Outdoor features</h4>
+    @for(var i = 0; i < @Model.OutdoorFeatures.Count; i++)
+    {      
+      <div class="form-check form-check-inline">
+         <input asp-for="@Model.OutdoorFeatures[i].Value" type="hidden" value="@Model.OutdoorFeatures[i].Value">
+        <input asp-for="@Model.OutdoorFeatures[i].isSelected" type="checkbox" class="form-check-input" >
+        <label asp-for="@Model.OutdoorFeatures[i].isSelected" class="form-check-label" >@Model.OutdoorFeatures[i].Value</label>
+        </div>  
+    }
+<hr>
+<h4>Indoor features</h4>
+    @for(var i = 0; i < Model.IndoorFeatures.Count; i++)
+    {   
+      <div class="form-check form-check-inline">
+         <input asp-for="@Model.IndoorFeatures[i].Value" type="hidden" value="@Model.IndoorFeatures[i].Value">
+        <input asp-for="@Model.IndoorFeatures[i].isSelected" type="checkbox" class="form-check-input" >
+        <label asp-for="@Model.IndoorFeatures[i].isSelected" class="form-check-label" >@Model.IndoorFeatures[i].Value</label>
+        </div>  
+    }
+    <hr>
+<h4>Climate Control</h4>
+    @for(var i = 0; i < Model.ClimateControl.Count; i++)
+    {
+      
+      <div class="form-check form-check-inline">
+            <input asp-for="@Model.ClimateControl[i].Value" type="hidden" value="@Model.ClimateControl[i].Value">
+        <input asp-for="@Model.ClimateControl[i].isSelected" type="checkbox" class="form-check-input" >
+        <label asp-for="@Model.ClimateControl[i].isSelected" class="form-check-label" >@Model.ClimateControl[i].Value</label>
+        </div>  
+        
 
+    }
+  <br>
+  <br>
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>

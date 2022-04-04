@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealEstateDemoApp.Models;
+using RealEstateDemoApp.Models.Features;
+using RealEstateDemoApp.Models.Listings;
 using System.Diagnostics;
 
 namespace RealEstateDemoApp.Controllers
@@ -13,9 +15,10 @@ namespace RealEstateDemoApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(AllListingsQueryModel data)
         {
-            return View();
+
+            return View(data);
         }
 
         public IActionResult Privacy()

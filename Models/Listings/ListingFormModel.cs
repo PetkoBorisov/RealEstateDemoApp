@@ -1,18 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RealEstateDemoApp.Models.Features;
 using System.Linq;
 
 namespace RealEstateDemoApp.Models.Listings
 {
     public class ListingFormModel
     {
+        public ListingFormModel()
+        {
+            this.OutdoorFeatures = FeaturesFeeder.feedOutdoorFeatures();
+
+            this.IndoorFeatures = FeaturesFeeder.feedIndoorFeatures();
+
+            this.ClimateControl = FeaturesFeeder.feedClimateFeatures();
+
+
+
+
+            
+        }
        
         public int PropertyTypeId { get; set; }
         public int ListingTypeId { get; set; }
        
-        public string? OutdoorFeatures { get; set; }
-        public string? IndoorFeatures { get; set; }
+        public List<FeatureModel>? OutdoorFeatures { get; set; }
+        public List<FeatureModel>? IndoorFeatures { get; set; }
         public string? Images { get; set; }
-        public string? ClimateControl { get; set; }
+        public List<FeatureModel>? ClimateControl { get; set; }
         public string? Status { get; set; }
         public string? Description { get; set; }
         public int Bedrooms { get; set; }

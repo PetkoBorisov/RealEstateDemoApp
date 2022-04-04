@@ -1,0 +1,35 @@
+﻿
+using RealEstateDemoApp.Models.Features;
+
+namespace RealEstateDemoApp.Models.Listings
+{
+    public class AllListingsQueryModel
+    {
+        public AllListingsQueryModel()
+        {
+            this.IndoorFeatures = FeaturesFeeder.feedIndoorFeatures();
+            this.OutdoorFeatures = FeaturesFeeder.feedOutdoorFeatures();
+            this.ClimateControl = FeaturesFeeder.feedClimateFeatures();
+        }
+
+        public int PropertyTypeId { get; set; }
+        public int ListingTypeId { get; set; }
+        public string? Status { get; set; }
+        public int Bedrooms { get; set; }
+        public int Bathrooms { get; set; }
+        public int CarSpaces { get; set; }
+        public int LandSizeFrom { get; set; }
+        public int LandSizeTo { get; set; }
+        public decimal PriceFrom { get; set; }
+        public decimal PriceTo { get; set; }
+        public string? Country { get; set; }
+        public string? City { get; set; }
+
+
+        public List<FeatureModel> IndoorFeatures { get; set; }
+        public List<FeatureModel> OutdoorFeatures { get; set; }
+        public List<FeatureModel> ClimateControl { get; set; }
+
+        
+    }
+}

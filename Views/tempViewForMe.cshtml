@@ -1,0 +1,213 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model ListingFormModel
+
+  
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+<select asp-for="PropertyTypeId" class="form-select" aria-label="Select property type">
+  <option selected>Select property type</option>
+  <option value="1">House</option>
+  <option value="2">Flat</option>
+</select>
+ <hr>
+<select asp-for="ListingTypeId" class="form-select" aria-label="Select listing type">
+  <option selected>Select listing type</option>
+  <option value="1">Rent</option>
+  <option value="2">Sell</option>
+</select>
+   <hr>
+  <div class="form-group">
+    <label asp-for="Price">Price</label>
+    <input asp-for="Price" type="number" class="form-control" placeholder="0.00$">
+  </div>
+    <hr>
+  <div class="form-group">
+    <label asp-for="Country">Country</label>
+    <input asp-for="Country" type="text" class="form-control" placeholder="Bulgaria,Romania...">
+  </div>
+   <hr>
+  <div class="form-group">
+    <label asp-for="City">City</label>
+    <input asp-for="City" type="text" class="form-control" placeholder="Varna,Shumen...">
+  </div>
+ 
+           
+        </div>
+         <div class="col-sm">
+
+              <div class="form-group">
+                  <div class="form-group">
+    <label asp-for="Neighborhood">Neighborhood</label>
+    <input asp-for="Neighborhood" type="text" class="form-control" placeholder="Flower hood">
+  </div>
+    <label asp-for="Floor">Floor</label>
+    <input asp-for="Floor" type="text" class="form-control" placeholder="1,2,3...">
+  </div>
+   <hr>
+  <div class="form-group">
+    <label asp-for="AllFloors">AllFloors</label>
+    <input asp-for="AllFloors" type="text" class="form-control" placeholder="1,2,3...">
+  </div>
+
+  <div class="form-group">
+    <label asp-for="Bedrooms">Bedrooms</label>
+    <input asp-for="Bedrooms" type="number" class="form-control" placeholder="0">
+  </div>
+ <hr>
+  <div class="form-group">
+    <label asp-for="Bathrooms" >Bathrooms</label>
+    <input asp-for="Bathrooms" type="number" class="form-control"placeholder="0">
+  </div>
+   <hr>
+  <div class="form-group">
+    <label asp-for="CarSpaces">CarSpaces</label>
+    <input asp-for="CarSpaces" type="number" class="form-control" placeholder="0">
+  </div>
+   <hr>
+  <div class="form-group">
+    <label asp-for="LandSize">LandSize</label>
+    <input asp-for="LandSize" type="number" class="form-control" placeholder="0.00m/2">
+  </div>
+        </div>
+
+         <div class="col-sm">
+<h4>New or established</h4>
+  <div class="form-check form-check-inline">
+    <input asp-for="Status" type="radio" name="status" value="New" class="custom-control-input"  >
+    <label  asp-for="Status" class="form-check-label">New</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input asp-for="Status" type="radio" name="status" value="Established" class="custom-control-input" >
+    <label asp-for="Status"  class="form-check-label" >Established</label>
+  </div>
+  <hr>
+  <h4>Outdoor features</h4>
+ 
+  <div class="form-check">
+  <div class="form-check form-check-inline">
+    <input asp-for="OutdoorFeatures" type="checkbox" class="form-check-input" value="Balcony" name="outdoor" >
+    <label asp-for="OutdoorFeatures" class="form-check-label" >Balcony</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input asp-for="OutdoorFeatures" type="checkbox" class="form-check-input" value="Outdoor area" name="outdoor" >
+    <label asp-for="OutdoorFeatures" class="form-check-label" >Outdoor area</label>
+  </div>
+  </div>
+    <div class="form-check">
+     <div class="form-check form-check-inline">
+    <input asp-for="OutdoorFeatures" type="checkbox" class="form-check-input" value="Undercover parking" name="outdoor" >
+    <label asp-for="OutdoorFeatures" class="form-check-label" >Undercover parking</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input asp-for="OutdoorFeatures" type="checkbox" class="form-check-input" value="Shed" name="outdoor" >
+    <label asp-for="OutdoorFeatures" class="form-check-label">Shed</label>
+  </div>
+  </div>
+   <div class="form-check">
+     <div class="form-check form-check-inline">
+    <input asp-for="OutdoorFeatures" type="checkbox" class="form-check-input" value="Fully fenced" name="outdoor" >
+    <label asp-for="OutdoorFeatures" class="form-check-label" >Fully fenced</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input asp-for="OutdoorFeatures" type="checkbox" class="form-check-input" value="Tennis court" name="outdoor" >
+    <label asp-for="OutdoorFeatures" class="form-check-label" >Tennis court</label>
+  </div>
+  </div>
+ 
+
+
+
+  <h4>Indoor features</h4>
+  <div class="form-check">
+  <div class="form-check form-check-inline">
+    <input asp-for="IndoorFeatures" type="checkbox" value="Ensuite" class="form-check-input" name="indoor" >
+    <label asp-for="IndoorFeatures"  class="form-check-label" >Ensuite</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input asp-for="IndoorFeatures"  type="checkbox" value="Dishwasher"  class="form-check-input" name="indoor">
+    <label asp-for="IndoorFeatures"  class="form-check-label" >Dishwasher</label>
+  </div>
+  </div>
+    <div class="form-check">
+     <div class="form-check form-check-inline">
+    <input asp-for="IndoorFeatures"  type="checkbox" value="Study"  class="form-check-input" name="indoor">
+    <label asp-for="IndoorFeatures"  class="form-check-label">Study</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input asp-for="IndoorFeatures"  type="checkbox" value="Built in robes"  class="form-check-input" name="indoor">
+    <label asp-for="IndoorFeatures"  class="form-check-label" >Built in robes</label>
+  </div>
+  </div>
+   <div class="form-check">
+     <div class="form-check form-check-inline">
+    <input asp-for="IndoorFeatures"  type="checkbox" value="Alarm system"  class="form-check-input" name="indoor">
+    <label asp-for="IndoorFeatures"  class="form-check-label" >Alarm system</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input  asp-for="IndoorFeatures" type="checkbox" value="Broadband"  class="form-check-input" name="indoor" >
+    <label asp-for="IndoorFeatures"  class="form-check-label" >Broadband</label>
+  </div>
+  </div>
+   <div class="form-check">
+     <div class="form-check form-check-inline">
+    <input  asp-for="IndoorFeatures" type="checkbox" value="Gym"  class="form-check-input" name="indoor">
+    <label  asp-for="IndoorFeatures" class="form-check-label" >Gym</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input  asp-for="IndoorFeatures" type="checkbox" value="Workshop"  class="form-check-input" name="indoor" >
+    <label asp-for="IndoorFeatures"  class="form-check-label" >Workshop</label>
+  </div>
+  </div>
+ 
+  
+
+  <h4>Climate control & energy</h4>
+  <div class="form-check">
+  <div class="form-check form-check-inline">
+    <input asp-for="ClimateControl" type="checkbox" value="Air conditioning"  class="form-check-input" name="climate">
+    <label asp-for="ClimateControl" class="form-check-label">Air conditioning</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input asp-for="ClimateControl" type="checkbox" value="Solar panels"  class="form-check-input" name="climate">
+    <label asp-for="ClimateControl" class="form-check-label" >Solar panels</label>
+  </div>
+  </div>
+    <div class="form-check">
+     <div class="form-check form-check-inline">
+    <input asp-for="ClimateControl" type="checkbox" value="Heating"  class="form-check-input" name="climate">
+    <label asp-for="ClimateControl" class="form-check-label" >Heating</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input asp-for="ClimateControl" type="checkbox" value="High energy efficiency"  class="form-check-input" name="climate">
+    <label asp-for="ClimateControl" class="form-check-label" >High energy efficiency</label>
+  </div>
+  </div>
+   <div class="form-check">
+     <div class="form-check form-check-inline">
+    <input asp-for="ClimateControl" type="checkbox" value="Watertank"  class="form-check-input" name="climate">
+    <label asp-for="ClimateControl" class="form-check-label" >Watertank</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input asp-for="ClimateControl" type="checkbox" value="Solar hot water"  class="form-check-input" name="climate">
+    <label asp-for="ClimateControl" class="form-check-label" >Solar hot water</label>
+  </div>
+  </div>
+
+  <br>
+  <br>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  
+        </div>
+
+
+
+    </div>
+</div>
