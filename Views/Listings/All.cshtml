@@ -3,11 +3,11 @@
 *@
 @{
 }
-@model List<Listing>
+@model AllListingsQueryModel
 
     <div class="card-deck text-center">
 
-    @foreach(var listing in Model){
+    @foreach(var listing in Model.Listings){
         <div class="card w-25 m-3 d-inline-block">
     <img class="card-img-top" src="@listing.Images.FirstOrDefault().Url" alt="Card image cap">
     <div class="card-img-overlay">

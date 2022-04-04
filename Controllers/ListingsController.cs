@@ -47,7 +47,7 @@ namespace RealEstateDemoApp.Controllers
         }
 
 
-        public IActionResult All(AllListingsQueryModel modelData)
+        public IActionResult All([FromQuery]AllListingsQueryModel modelData)
         {
             //Add AllListingsQueryModel
             //Get all the search criterias from the query string
@@ -59,7 +59,8 @@ namespace RealEstateDemoApp.Controllers
             var data = _listings.All(modelData.PriceFrom,modelData.PriceTo,modelData.Country,modelData.City,modelData.PropertyTypeId,
                 modelData.ListingTypeId,modelData.Status,modelData.Bedrooms,modelData.Bathrooms,modelData.CarSpaces,
                 indoors,outdoors,climate,modelData.LandSizeFrom,modelData.LandSizeTo);
-            return View(data);
+            modelData.Listings = data;
+            return View(modelData);
         }
     }
 }

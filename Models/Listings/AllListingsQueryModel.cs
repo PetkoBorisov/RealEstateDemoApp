@@ -1,4 +1,5 @@
 ﻿
+using RealEstateDemoApp.Data.Models;
 using RealEstateDemoApp.Models.Features;
 
 namespace RealEstateDemoApp.Models.Listings
@@ -30,6 +31,6 @@ namespace RealEstateDemoApp.Models.Listings
         public List<FeatureModel> OutdoorFeatures { get; set; }
         public List<FeatureModel> ClimateControl { get; set; }
 
-        
+        public List<Listing> Listings { get; set; }
     }
 }
