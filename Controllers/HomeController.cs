@@ -47,6 +47,12 @@ namespace RealEstateDemoApp.Controllers
             }
             modelData.cauroselItems = viewModels;
 
+
+            if (modelData == null)
+            {
+                return View(new AllListingsQueryModel());
+            }
+
             return View(modelData);
         }
 
