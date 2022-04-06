@@ -31,6 +31,7 @@ namespace RealEstateDemoApp.Models.Listings
         public List<FeatureModel> OutdoorFeatures { get; set; }
         public List<FeatureModel> ClimateControl { get; set; }
 
+        public List<IndexModel> cauroselItems  { get; set; }
         public List<Listing> Listings { get; set; }
     }
 }

@@ -49,10 +49,7 @@ namespace RealEstateDemoApp.Controllers
 
         public IActionResult All([FromQuery]AllListingsQueryModel modelData)
         {
-            //Add AllListingsQueryModel
-            //Get all the search criterias from the query string
-            //Sort and filter the listings based on that and set the collection property of the query model
-            //Send the query model to the view
+          
             var indoors = modelData.IndoorFeatures.Where(x=>x.isSelected).Select(x=>x.Value).ToList();
             var outdoors = modelData.OutdoorFeatures.Where(x => x.isSelected).Select(x => x.Value).ToList();
             var climate = modelData.ClimateControl.Where(x => x.isSelected).Select(x => x.Value).ToList();

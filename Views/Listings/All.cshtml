@@ -5,26 +5,138 @@
 }
 @model AllListingsQueryModel
 
-    <div class="card-deck text-center">
-
-    @foreach(var listing in Model.Listings){
-        <div class="card w-25 m-3 d-inline-block">
-    <img class="card-img-top" src="@listing.Images.FirstOrDefault().Url" alt="Card image cap">
-    <div class="card-img-overlay">
-    <div class="w-25 bg-danger rounded-pill text-center"><span class="badge badge-danger">@listing.PropertyType.Name</span></div>
-    <div class="w-25 bg-warning rounded-pill text-center"><span class="badge badge-warning">@listing.ListingType.Name</span></div>
-  </div>
-    <div class="card-body">
-      <h5 class="card-title">@listing.ListingAddress.ToString()</h5>
-      <p class="card-text"><i class="fa fa-bed mx-3">@listing.Bedrooms</i><i class="fa fa-shower mx-3">@listing.Bathrooms</i><i class="fa fa-car mx-3">@listing.CarSpaces</i></p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      <a href="#" class="btn btn-danger stretched-link">Details</a>
-    </div>
-  </div>
 
 
-    }
+
+
+   @await Component.InvokeAsync("SearchForm",Model)
 
   
- 
-</div>
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+            <div class="title-single-box">
+              <h1 class="title-single">Our Amazing Properties</h1>
+              <span class="color-text-a">Grid Properties</span>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-4">
+            <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="#">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Properties Grid
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Intro Single-->
+
+    <!-- ======= Property Grid ======= -->
+    <section class="property-grid grid">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="grid-option">
+              <form>
+                <select class="custom-select">
+                  <option selected>All</option>
+                  <option value="1">New to Old</option>
+                  <option value="2">For Rent</option>
+                  <option value="3">For Sale</option>
+                </select>
+              </form>
+            </div>
+          </div>
+          @foreach(var listing in Model.Listings){
+                 <div class="col-md-4">
+            <div class="card-box-a card-shadow">
+              <div class="img-box-a">
+                <img src="@listing.Images.FirstOrDefault().Url" alt="" class="img-a img-fluid">
+              </div>
+              <div class="card-overlay">
+                <div class="card-overlay-a-content">
+                  <div class="card-header-a">
+                    <h2 class="card-title-a">
+                      <a href="#">@listing.ListingAddress.Neighborhood
+                        <br /> @listing.ListingAddress.Street</a>
+                    </h2>
+                  </div>
+                  <div class="card-body-a">
+                    <div class="price-box d-flex">
+                      <span class="price-a">@listing.PropertyType.Name | $ @listing.Price</span>
+                    </div>
+                    <a href="property-single.html" class="link-a">Click here to view
+                      <span class="bi bi-chevron-right"></span>
+                    </a>
+                  </div>
+                  <div class="card-footer-a">
+                    <ul class="card-info d-flex justify-content-around">
+                      <li>
+                        <h4 class="card-info-title">Area</h4>
+                        <span>@listing.LandSize m
+                          <sup>2</sup>
+                        </span>
+                      </li>
+                      <li>
+                        <h4 class="card-info-title">Beds</h4>
+                        <span>@listing.Bedrooms</span>
+                      </li>
+                      <li>
+                        <h4 class="card-info-title">Baths</h4>
+                        <span>@listing.Bathrooms</span>
+                      </li>
+                      <li>
+                        <h4 class="card-info-title">Garages</h4>
+                        <span>@listing.CarSpaces</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          }
+       
+         
+        <div class="row">
+          <div class="col-sm-12">
+            <nav class="pagination-a">
+              <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">
+                    <span class="bi bi-chevron-left"></span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item next">
+                  <a class="page-link" href="#">
+                    <span class="bi bi-chevron-right"></span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Property Grid Single-->
+
+

@@ -1,0 +1,91 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model AllListingsQueryModel
+
+<!--/ Form Search Star /-->
+  <div class="box-collapse">
+    <div class="title-box-d">
+      <h3 class="title-d">Search Property</h3>
+    </div>
+    <span class="close-box-collapse right-boxed bi bi-x"></span>
+    <div class="box-collapse-wrap form">
+      <form class="form-a"  asp-action="All" asp-controller="Listings" method="get" >
+        <div class="row">
+          <div class="col-md-12 mb-2">
+            <div class="form-group">
+              <label class="pb-2" for="Type">Keyword</label>
+               <input asp-for="Country" type="text" class="form-control form-control-lg form-control-a" placeholder="Country">
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="Type">Type</label>
+              <select asp-for="PropertyTypeId" class="form-control form-select form-control-a" id="Type">
+              <option selected value="0">Any</option>
+              <option value="1">House</option>
+              <option value="2">Flat</option>
+                </select>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+           <div class="form-group">
+              <label class="pb-2" for="Type">City</label>
+              <input asp-for="City" type="text" class="form-control form-control-lg form-control-a" placeholder="City">
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="bedrooms">Bedrooms</label>
+              <select asp-for="Bedrooms" class="form-control form-select form-control-a" id="bedrooms">
+                <option value="0">Any</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="garages">Car Spaces</label>
+              <select asp-for="CarSpaces" class="form-control form-select form-control-a" id="garages">
+                <option value="0">Any</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option> 
+              </select>
+            </div>
+          </div>
+           <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="bedrooms">Bathrooms</label>
+              <select asp-for="Bathrooms" class="form-control form-select form-control-a" id="athRooms">
+                <option value="0">Any</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="price">Price From</label>
+              <select asp-for="PriceFrom" class="form-control form-select form-control-a" id="price">
+                <option selected value="0">Cheapest</option>
+                            @for(var i = 0; i < 50000; i=i+1500)
+                            {
+                                 <option value="@i">$@i</option>
+                            }
+                        </select>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-b">Search Property</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div><!-- End Property Search Section -->

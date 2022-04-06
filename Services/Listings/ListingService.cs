@@ -13,6 +13,13 @@ namespace RealEstateDemoApp.Services.Listings
             this._data = data;
         }
 
+        public List<Listing> All()
+        {
+
+            return _data.Listings.Include(x => x.ListingAddress).Include(x => x.Images).Include(x => x.PropertyType).Include(x => x.ListingType).ToList();
+        }
+
+
         public List<Listing> All(decimal priceFrom,decimal priceTo,string country,string city,int propertyTypeId, int listingTypeId
             ,string status,int bedrooms,int bathrooms,int carSpaces,List<string> indoorFeatures
             , List<string> outdoorFeatures, List<string> climateControl, int landSizeFrom, int landSizeTo)

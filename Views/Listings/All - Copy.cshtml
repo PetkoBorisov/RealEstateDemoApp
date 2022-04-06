@@ -1,0 +1,148 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model AllListingsQueryModel
+
+<div class ="container-fluid d-inline-flex w-25 pull-left">
+<form asp-action="All" asp-controller="Listings" method="get" class="d-inline-block">
+ <select asp-for="PropertyTypeId" class="form-select" aria-label="Select property type">
+  <option selected>Select property type</option>
+   <option selected value="0">Any</option>
+  <option value="1">House</option>
+  <option value="2">Flat</option>
+</select>
+ <hr>
+<select asp-for="ListingTypeId" class="form-select" aria-label="Select listing type">
+  <option selected>Select listing type</option>
+  <option value="0">Any</option>
+  <option value="1">Rent</option>
+  <option value="2">Sell</option>
+</select>
+   <hr>
+  <div class="form-group">
+    <label asp-for="PriceFrom">Price from</label>
+    <input asp-for="PriceFrom" type="number" class="form-control" placeholder="0.00$">
+  </div>
+    <hr>
+     <div class="form-group">
+    <label asp-for="PriceTo">Price to</label>
+    <input asp-for="PriceTo" type="number" class="form-control" placeholder="0.00$">
+  </div>
+    <hr>
+  <div class="form-group">
+    <label asp-for="Country">Country</label>
+    <input asp-for="Country" type="text" class="form-control" placeholder="Bulgaria,Romania...">
+  </div>
+   <hr>
+  <div class="form-group">
+    <label asp-for="City">City</label>
+    <input asp-for="City" type="text" class="form-control" placeholder="Varna,Shumen...">
+  </div>
+  <hr>
+  <div class="form-group">
+    <label asp-for="Bedrooms">Bedrooms</label>
+    <input asp-for="Bedrooms" type="number" class="form-control" placeholder="0">
+  </div>
+ <hr>
+  <div class="form-group">
+    <label asp-for="Bathrooms" >Bathrooms</label>
+    <input asp-for="Bathrooms" type="number" class="form-control"placeholder="0">
+  </div>
+   <hr>
+  <div class="form-group">
+    <label asp-for="CarSpaces">CarSpaces</label>
+    <input asp-for="CarSpaces" type="number" class="form-control" placeholder="0">
+  </div>
+   <hr>
+  <div class="form-group">
+    <label asp-for="LandSizeFrom">LandSize from</label>
+    <input asp-for="LandSizeFrom" type="number" class="form-control" placeholder="0.00m/2">
+  </div>
+  <hr>
+   <div class="form-group">
+    <label asp-for="LandSizeTo">LandSize to</label>
+    <input asp-for="LandSizeTo" type="number" class="form-control" placeholder="0.00m/2">
+  </div>
+  <hr>
+    <h4>Status</h4>
+  <div class="form-check form-check-inline">
+    <input asp-for="Status" type="radio" name="status" value="New" class="custom-control-input"  >
+    <label  asp-for="Status" class="form-check-label">New</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input asp-for="Status" type="radio" name="status" value="Established" class="custom-control-input" >
+    <label asp-for="Status"  class="form-check-label" >Established</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input asp-for="Status" type="radio" name="status" value="" class="custom-control-input" >
+    <label asp-for="Status"  class="form-check-label" >Any</label>
+  </div>
+  <hr>
+  <h4>Outdoor features</h4>
+    @for(var i = 0; i < @Model.OutdoorFeatures.Count; i++)
+    {      
+      <div class="form-check form-check-inline">
+         <input asp-for="@Model.OutdoorFeatures[i].Value" type="hidden" value="@Model.OutdoorFeatures[i].Value">
+        <input asp-for="@Model.OutdoorFeatures[i].isSelected" type="checkbox" class="form-check-input" >
+        <label asp-for="@Model.OutdoorFeatures[i].isSelected" class="form-check-label" >@Model.OutdoorFeatures[i].Value</label>
+        </div>  
+    }
+<hr>
+<h4>Indoor features</h4>
+    @for(var i = 0; i < Model.IndoorFeatures.Count; i++)
+    {   
+      <div class="form-check form-check-inline">
+         <input asp-for="@Model.IndoorFeatures[i].Value" type="hidden" value="@Model.IndoorFeatures[i].Value">
+        <input asp-for="@Model.IndoorFeatures[i].isSelected" type="checkbox" class="form-check-input" >
+        <label asp-for="@Model.IndoorFeatures[i].isSelected" class="form-check-label" >@Model.IndoorFeatures[i].Value</label>
+        </div>  
+    }
+    <hr>
+<h4>Climate Control</h4>
+    @for(var i = 0; i < Model.ClimateControl.Count; i++)
+    {
+      
+      <div class="form-check form-check-inline">
+            <input asp-for="@Model.ClimateControl[i].Value" type="hidden" value="@Model.ClimateControl[i].Value">
+        <input asp-for="@Model.ClimateControl[i].isSelected" type="checkbox" class="form-check-input" >
+        <label asp-for="@Model.ClimateControl[i].isSelected" class="form-check-label" >@Model.ClimateControl[i].Value</label>
+        </div>  
+        
+
+    }
+  <br>
+  <br>
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+</div>    
+
+
+
+
+
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+
+    @foreach(var listing in Model.Listings){
+        <div class="card w-25 m-3 d-inline-block">
+    <img class="card-img-top" src="@listing.Images.FirstOrDefault().Url" alt="Card image cap">
+    <div class="card-img-overlay">
+    <div class="w-25 bg-danger rounded-pill text-center"><span class="badge badge-danger">@listing.PropertyType.Name</span></div>
+    <div class="w-25 bg-warning rounded-pill text-center"><span class="badge badge-warning">@listing.ListingType.Name</span></div>
+  </div>
+    <div class="card-body">
+      <h5 class="card-title">@listing.ListingAddress.ToString()</h5>
+      <p class="card-text"><i class="fa fa-bed mx-3">@listing.Bedrooms</i><i class="fa fa-shower mx-3">@listing.Bathrooms</i><i class="fa fa-car mx-3">@listing.CarSpaces</i></p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <a href="#" class="btn btn-danger stretched-link">Details</a>
+    </div>
+  </div>
+
+
+    }
+
+  
+ 
+</div>
