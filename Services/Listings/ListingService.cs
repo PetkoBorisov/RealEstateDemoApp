@@ -19,6 +19,16 @@ namespace RealEstateDemoApp.Services.Listings
             return _data.Listings.Include(x => x.ListingAddress).Include(x => x.Images).Include(x => x.PropertyType).Include(x => x.ListingType).ToList();
         }
 
+        public Listing GetById(int id)
+        {
+            var data =  _data.Listings.Include(x => x.ListingAddress).Include(x => x.Images).Include(x => x.PropertyType).Include(x => x.ListingType).ToList();
+            var result = data.Find(x => x.Id == id);
+            return result;
+
+        }
+
+
+
 
         public ListingsQueryServiceModel All(decimal priceFrom,decimal priceTo,string country,string city,int propertyTypeId, int listingTypeId
             ,string status,int bedrooms,int bathrooms,int carSpaces,List<string> indoorFeatures

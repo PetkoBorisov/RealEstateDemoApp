@@ -29,6 +29,8 @@ namespace RealEstateDemoApp.Services.Listings
 
         List<Listing> All();
 
+        Listing GetById(int id);
+
     }
 }
 

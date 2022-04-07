@@ -24,6 +24,38 @@ namespace RealEstateDemoApp.Controllers
         }
 
 
+        public IActionResult Details(int id)
+        {
+            var listing = _listings.GetById(id);
+            var modelData = new DetailsListingModel
+            {
+                City = listing.ListingAddress.City,
+                Country = listing.ListingAddress.Country,
+                Neighborhood = listing.ListingAddress.Neighborhood,
+                PostCode = listing.ListingAddress.PostCode,
+                imgUrls = listing.Images.Select(x => x.Url).ToList(),
+                Price = listing.Price,
+                Street = listing.ListingAddress.Street,
+                Description = listing.Description,
+                PropertyType = listing.PropertyType.Name,
+                ListingType = listing.ListingType.Name,
+                IndoorFeatures = listing.IndoorFeatures.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList(),
+                OutdoorFeatures = listing.OutdoorFeatures.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList(),
+                ClimateControl = listing.ClimateControl.Split(",",StringSplitOptions.RemoveEmptyEntries).ToList(),
+                LandSize = listing.LandSize,
+                CarSpaces = listing.CarSpaces,
+                Bathrooms = listing.Bathrooms,
+                Bedrooms = listing.Bedrooms,
+
+                
+
+            };
+            return View(modelData);
+        }
+
+
+
+
         [HttpPost]
         public IActionResult Add(ListingFormModel data)
         {
