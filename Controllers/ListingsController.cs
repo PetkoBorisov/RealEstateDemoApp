@@ -53,10 +53,43 @@ namespace RealEstateDemoApp.Controllers
             var indoors = modelData.IndoorFeatures.Where(x=>x.isSelected).Select(x=>x.Value).ToList();
             var outdoors = modelData.OutdoorFeatures.Where(x => x.isSelected).Select(x => x.Value).ToList();
             var climate = modelData.ClimateControl.Where(x => x.isSelected).Select(x => x.Value).ToList();
+
+
+            var dict = new Dictionary<string, string>();
+            foreach (var param in this.Request.Query)
+            {
+                dict[param.Key] = param.Value.ToString();
+            }
+            modelData.queryDict = dict;
+
+
+
+            if (modelData.currentPage < 1)
+            {
+                modelData.currentPage = 1;
+            }
+
+
+          
+
+
+
+
+
             var data = _listings.All(modelData.PriceFrom,modelData.PriceTo,modelData.Country,modelData.City,modelData.PropertyTypeId,
                 modelData.ListingTypeId,modelData.Status,modelData.Bedrooms,modelData.Bathrooms,modelData.CarSpaces,
-                indoors,outdoors,climate,modelData.LandSizeFrom,modelData.LandSizeTo);
-            modelData.Listings = data;
+                indoors,outdoors,climate,modelData.LandSizeFrom,modelData.LandSizeTo,modelData.currentPage, AllListingsQueryModel.ItemsPerPage);
+            modelData.Listings = data.Listings;
+
+             modelData.totalPages = Math.Ceiling((double)data.totalListings / AllListingsQueryModel.ItemsPerPage);
+
+            if (modelData.totalPages < 1)
+            {
+                modelData.totalPages = 1;
+            }
+
+
+
             return View(modelData);
         }
     }

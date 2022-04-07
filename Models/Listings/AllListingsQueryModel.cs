@@ -11,8 +11,9 @@ namespace RealEstateDemoApp.Models.Listings
             this.IndoorFeatures = FeaturesFeeder.feedIndoorFeatures();
             this.OutdoorFeatures = FeaturesFeeder.feedOutdoorFeatures();
             this.ClimateControl = FeaturesFeeder.feedClimateFeatures();
+            this.currentPage = 1;
         }
-
+        public static int ItemsPerPage = 3;
         public int PropertyTypeId { get; set; }
         public int ListingTypeId { get; set; }
         public string? Status { get; set; }
@@ -25,8 +26,9 @@ namespace RealEstateDemoApp.Models.Listings
         public decimal PriceTo { get; set; }
         public string? Country { get; set; }
         public string? City { get; set; }
-
-
+        public int currentPage { get; set; }
+        public double totalPages { get; set; }
+        public Dictionary<string,string> queryDict { get; set; }
         public List<FeatureModel> IndoorFeatures { get; set; }
         public List<FeatureModel> OutdoorFeatures { get; set; }
         public List<FeatureModel> ClimateControl { get; set; }

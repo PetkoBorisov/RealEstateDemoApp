@@ -20,11 +20,16 @@ namespace RealEstateDemoApp.Services.Listings
         }
 
 
-        public List<Listing> All(decimal priceFrom,decimal priceTo,string country,string city,int propertyTypeId, int listingTypeId
+        public ListingsQueryServiceModel All(decimal priceFrom,decimal priceTo,string country,string city,int propertyTypeId, int listingTypeId
             ,string status,int bedrooms,int bathrooms,int carSpaces,List<string> indoorFeatures
-            , List<string> outdoorFeatures, List<string> climateControl, int landSizeFrom, int landSizeTo)
+            , List<string> outdoorFeatures, List<string> climateControl, int landSizeFrom, int landSizeTo,
+            int currentPage,int itemsPerPage)
         {   
+            var modelData = new ListingsQueryServiceModel();
             var data = _data.Listings.Include(x => x.ListingAddress).Include(x=>x.Images).Include(x=>x.PropertyType).Include(x=>x.ListingType).ToList();
+           
+
+
             if(priceFrom != 0)
             {
                 data = data.Where(x => x.Price >= priceFrom).ToList();
@@ -116,8 +121,14 @@ namespace RealEstateDemoApp.Services.Listings
                 data = data.Where(x => x.LandSize <= landSizeTo).ToList();
             }
 
+            modelData.totalListings = data.Count;
+            data = data
+               .Skip((currentPage - 1) * itemsPerPage)
+               .Take(itemsPerPage).ToList();
 
-            return data;
+            modelData.Listings = data;
+
+            return modelData;
         }
 
         public int Create(int sellerId, int listingAddressId, decimal price,
