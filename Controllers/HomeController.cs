@@ -26,27 +26,32 @@ namespace RealEstateDemoApp.Controllers
                 modelData.ListingTypeId, modelData.Status, modelData.Bedrooms, modelData.Bathrooms, modelData.CarSpaces,
                 indoors, outdoors, climate, modelData.LandSizeFrom, modelData.LandSizeTo,modelData.currentPage, AllListingsQueryModel.ItemsPerPage);
             modelData.Listings = data.Listings;
-          
-           
 
-            List<IndexModel> viewModels = new List<IndexModel>();
-            for (var i = 0; i < 3; i++)
+
+            if (data.Listings.Count > 3)
             {
-                viewModels.Add(new IndexModel
+                List<IndexModel> viewModels = new List<IndexModel>();
+                for (var i = 0; i < 3; i++)
                 {
-                    imgUrl = data.Listings[i].Images.FirstOrDefault().Url,
-                    Country = data.Listings[i].ListingAddress.Country,
-                    City = data.Listings[i].ListingAddress.City,
-                    Street = data.Listings[i].ListingAddress.Street,
-                    PostCode = data.Listings[i].ListingAddress.PostCode,
-                    Neighborhood = data.Listings[i].ListingAddress.Neighborhood,
-                    Price = data.Listings[i].Price
+                    viewModels.Add(new IndexModel
+                    {
+                        imgUrl = data.Listings[i].Images.FirstOrDefault().Url,
+                        Country = data.Listings[i].ListingAddress.Country,
+                        City = data.Listings[i].ListingAddress.City,
+                        Street = data.Listings[i].ListingAddress.Street,
+                        PostCode = data.Listings[i].ListingAddress.PostCode,
+                        Neighborhood = data.Listings[i].ListingAddress.Neighborhood,
+                        Price = data.Listings[i].Price
 
-                });
-              
+                    });
+
+                }
+                modelData.cauroselItems = viewModels;
             }
-            modelData.cauroselItems = viewModels;
-
+            else
+            {
+                modelData.cauroselItems = null;
+            }
 
             if (modelData == null)
             {

@@ -4,6 +4,7 @@
 @{
 }
 @model ListingFormModel
+<div  class="intro-single">
 <form asp-action="Add" asp-controller="Listings" method="POST" class="w-25 mx-auto">
  <select asp-for="PropertyTypeId" class="form-select" aria-label="Select property type">
   <option selected>Select property type</option>
@@ -161,3 +162,4 @@
   
  
 </form>
+</div>

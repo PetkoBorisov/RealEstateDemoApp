@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RealEstateDemoApp.Data.Models
 {
@@ -6,7 +7,7 @@ namespace RealEstateDemoApp.Data.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int SellerId { get; set; }
+        public string? OwnerId { get; set; }
         public int ListingAddressId { get; set; }
         public decimal Price { get; set; }
         public int PropertyTypeId { get; set; } 
@@ -25,6 +26,7 @@ namespace RealEstateDemoApp.Data.Models
         public PropertyType? PropertyType { get; set; }
         public ListingType? ListingType { get; set; }
 
+        public IdentityUser Owner { get; set; }
         public ListingAddress? ListingAddress { get; set; }
         public List<ListingImage>? Images { get; set; }
     }

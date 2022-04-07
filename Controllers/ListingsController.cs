@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using RealEstateDemoApp.Models.Listings;
 using RealEstateDemoApp.Services.Addresses;
 using RealEstateDemoApp.Services.Listings;
+
 using System.Linq;
+using System.Security.Claims;
 
 namespace RealEstateDemoApp.Controllers
 {
@@ -10,13 +14,17 @@ namespace RealEstateDemoApp.Controllers
     {
         IListingService _listings;
         IAddressService _address;
+        public UserManager<IdentityUser> _user;
         
         public ListingsController(IListingService listings,
-            IAddressService address)
+            IAddressService address, UserManager<IdentityUser> user)
         {
             this._listings = listings;
             this._address = address;
+            this._user = user;
         }
+
+        [Authorize]
         public IActionResult Add()
         {
             ListingFormModel data = new ListingFormModel();
@@ -27,6 +35,7 @@ namespace RealEstateDemoApp.Controllers
         public IActionResult Details(int id)
         {
             var listing = _listings.GetById(id);
+           
             var modelData = new DetailsListingModel
             {
                 City = listing.ListingAddress.City,
@@ -46,7 +55,9 @@ namespace RealEstateDemoApp.Controllers
                 CarSpaces = listing.CarSpaces,
                 Bathrooms = listing.Bathrooms,
                 Bedrooms = listing.Bedrooms,
-
+                UserName = listing.Owner.UserName,
+                Email = listing.Owner.Email,
+                PhoneNumber = listing.Owner.PhoneNumber
                 
 
             };
@@ -55,12 +66,12 @@ namespace RealEstateDemoApp.Controllers
 
 
 
-
+        
         [HttpPost]
         public IActionResult Add(ListingFormModel data)
         {
             var test = data.IndoorFeatures.Where(x => x.isSelected).ToList();
-
+            var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var images = data.Images.Split(", ", StringSplitOptions.RemoveEmptyEntries).ToList();
             var indoors = String.Join(", ", data.IndoorFeatures.Select(x => x.Value).ToArray());
@@ -69,7 +80,7 @@ namespace RealEstateDemoApp.Controllers
             var listingAddressId = this._address.Create(data.Country, data.City, data.Street, data.PostCode, data.Neighborhood
                 , data.Entrance, data.Flat, data.AllFloors, data.Floor);
 
-            var listingId = this._listings.Create('0', listingAddressId, data.Price, data.PropertyTypeId,
+            var listingId = this._listings.Create(ownerId, listingAddressId, data.Price, data.PropertyTypeId,
                 outdoors,indoors, climate,data.Status, data.Description, data.Bedrooms, data.Bathrooms, data.ListingTypeId,
                 data.CarSpaces, data.LandSize, images);
 

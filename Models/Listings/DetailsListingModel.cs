@@ -29,6 +29,11 @@
         public string? ListingType { get; set; }
 
 
+        public string? PhoneNumber { get; set; }
+        public string? Email { get; set; }
+        public string? UserName { get; set; }
+      
+
         public List<string> OutdoorFeatures { get; set; }
         public List<string> IndoorFeatures { get; set; }
         public List<string> ClimateControl { get; set; }

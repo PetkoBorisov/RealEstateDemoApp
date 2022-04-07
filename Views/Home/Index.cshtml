@@ -12,7 +12,8 @@
   <div class="intro intro-carousel swiper position-relative">
 
     <div class="swiper-wrapper">
-        @foreach(var listing in Model.cauroselItems)
+        @if(Model.cauroselItems != null){
+        foreach(var listing in Model.cauroselItems)
         {
             <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(@listing.imgUrl)">
         <div class="overlay overlay-a"></div>
@@ -41,6 +42,7 @@
       </div>
 
 
+        }
         }
 
  
@@ -72,7 +74,7 @@
         <div id="property-carousel" class="swiper">
           <div class="swiper-wrapper">
 
-          
+                @if(Model.Listings.Count > 3){
                     @for(var i=0;i<3;i++)
                     {
                          <div class="carousel-item-b swiper-slide">
@@ -128,7 +130,7 @@
 
 
             }
-           
+           }
 
           
           </div>

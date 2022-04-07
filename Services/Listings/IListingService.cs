@@ -5,7 +5,7 @@ namespace RealEstateDemoApp.Services.Listings
     public interface IListingService
     {
         int Create(
-            int sellerId,
+            string sellerId,
             int listingAddressId,
             decimal price,
             int propertyTypeId,

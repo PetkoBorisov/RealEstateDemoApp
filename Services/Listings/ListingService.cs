@@ -21,7 +21,7 @@ namespace RealEstateDemoApp.Services.Listings
 
         public Listing GetById(int id)
         {
-            var data =  _data.Listings.Include(x => x.ListingAddress).Include(x => x.Images).Include(x => x.PropertyType).Include(x => x.ListingType).ToList();
+            var data =  _data.Listings.Include(x=>x.Owner).Include(x => x.ListingAddress).Include(x => x.Images).Include(x => x.PropertyType).Include(x => x.ListingType).ToList();
             var result = data.Find(x => x.Id == id);
             return result;
 
@@ -141,7 +141,7 @@ namespace RealEstateDemoApp.Services.Listings
             return modelData;
         }
 
-        public int Create(int sellerId, int listingAddressId, decimal price,
+        public int Create(string ownerId, int listingAddressId, decimal price,
             int propertyTypeId, string outdoorFeatures, string indoorFeatures,
             string climateControl, string status, string description, int bedrooms,
             int bathrooms, int listingTypeId, int carSpaces,
@@ -162,7 +162,7 @@ namespace RealEstateDemoApp.Services.Listings
 
             var data = new Listing
             {
-                SellerId = sellerId,
+                OwnerId = ownerId,
                 ListingAddressId = listingAddressId,
                 Price = price,
                 PropertyTypeId = propertyTypeId,
