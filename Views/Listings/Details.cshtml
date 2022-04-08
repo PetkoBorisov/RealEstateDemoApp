@@ -20,10 +20,10 @@
             <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="index.html">Home</a>
+                  <a asp-controller="Home" asp-action="Index">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a href="property-grid.html">Properties</a>
+                  <a href="javascript: history.go(-1)">Properties</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
                   @Model.Street
@@ -45,7 +45,7 @@
                         @foreach(var imgUrl in @Model.imgUrls)
                         {
                             <div class="carousel-item-b swiper-slide">
-                                 <img class="img-responsive" src="@imgUrl" alt="">
+                                 <img class="img-a" src="@imgUrl" alt="">
                             </div>
 
                         }

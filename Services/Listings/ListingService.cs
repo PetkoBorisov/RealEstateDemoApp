@@ -33,12 +33,12 @@ namespace RealEstateDemoApp.Services.Listings
         public ListingsQueryServiceModel All(decimal priceFrom,decimal priceTo,string country,string city,int propertyTypeId, int listingTypeId
             ,string status,int bedrooms,int bathrooms,int carSpaces,List<string> indoorFeatures
             , List<string> outdoorFeatures, List<string> climateControl, int landSizeFrom, int landSizeTo,
-            int currentPage,int itemsPerPage)
+            int currentPage,int itemsPerPage,int sortingKey)
         {   
             var modelData = new ListingsQueryServiceModel();
             var data = _data.Listings.Include(x => x.ListingAddress).Include(x=>x.Images).Include(x=>x.PropertyType).Include(x=>x.ListingType).ToList();
            
-
+            
 
             if(priceFrom != 0)
             {
@@ -135,6 +135,28 @@ namespace RealEstateDemoApp.Services.Listings
             data = data
                .Skip((currentPage - 1) * itemsPerPage)
                .Take(itemsPerPage).ToList();
+
+
+            if(sortingKey == 1)
+            {
+                data = data.OrderBy(x=>x.Price).ToList();
+            }
+            else
+            if (sortingKey == 2)
+            {
+                data = data.OrderByDescending(x => x.Price).ToList();
+            }
+            else 
+            if(sortingKey == 3)
+            {
+                data = data.Where(x => x.ListingType.Name == "Rent").ToList();
+            }
+            else
+            if (sortingKey == 4)
+            {
+                data = data.OrderBy(x => x.ListingType.Name == "Sale").ToList();
+            }
+
 
             modelData.Listings = data;
 

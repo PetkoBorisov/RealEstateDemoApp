@@ -10,7 +10,10 @@
 
   @* @await Component.InvokeAsync("SearchForm",Model)*@
 
-  
+@{
+    var matches = Model.Listings.Count;
+
+  }
 
     <!-- ======= Intro Single ======= -->
     <section class="intro-single">
@@ -18,8 +21,8 @@
         <div class="row">
           <div class="col-md-12 col-lg-8">
             <div class="title-single-box">
-              <h1 class="title-single">Our Amazing Properties</h1>
-              <span class="color-text-a">Grid Properties</span>
+              <h1 class="title-single">Catalog</h1>
+              <span class="color-text-a">Take a look!</span>
             </div>
           </div>
           <div class="col-md-12 col-lg-4">
@@ -45,26 +48,29 @@
           <div class="col-sm-12">
             <div class="grid-option">
               <form>
-                <select class="custom-select">
-                  <option selected>All</option>
-                  <option value="1">New to Old</option>
-                  <option value="2">For Rent</option>
-                  <option value="3">For Sale</option>
+                <select class="custom-select" id="SortingSelect" asp-for="SortingKey" asp-action="All" asp-controller="Listings" >
+                  <option value="0" selected>All</option>
+                  <option value="1">Cheapest First</option>
+                  <option value="2">Most-Expensive First</option>
+                  <option value="3">Rent</option>
+                   <option value="4">Sale</option>
                 </select>
               </form>
             </div>
           </div>
           @foreach(var listing in Model.Listings){
                  <div class="col-md-4">
-            <div class="card-box-a card-shadow">
+            <div class="card-box-a img-a card-shadow">
               <div class="img-box-a">
+                  
                 <img src="@listing.Images.FirstOrDefault().Url" alt="" class="img-a img-fluid">
+                
               </div>
               <div class="card-overlay">
                 <div class="card-overlay-a-content">
                   <div class="card-header-a">
                     <h2 class="card-title-a">
-                      <a href="#">@listing.ListingAddress.Neighborhood
+                      <a asp-controller="Listings" asp-action="Details" asp-route-id="@listing.Id">@listing.ListingAddress.Neighborhood
                         <br /> @listing.ListingAddress.Street</a>
                     </h2>
                   </div>

@@ -31,7 +31,7 @@
                       <br> @listing.Street
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ @listing.Price</span></a>
+                      <a asp-action="Details" asp-controller="Listings" asp-route-id="@listing.Id"><span class="price-a">rent | $ @listing.Price</span></a>
                     </p>
                   </div>
                 </div>
@@ -63,7 +63,7 @@
                 <h2 class="title-a">Latest Properties</h2>
               </div>
               <div class="title-link">
-                <a href="property-grid.html">All Property
+                <a asp-controller="Listings" asp-action="All">All Property
                   <span class="bi bi-chevron-right"></span>
                 </a>
               </div>
@@ -74,7 +74,7 @@
         <div id="property-carousel" class="swiper">
           <div class="swiper-wrapper">
 
-                @if(Model.Listings.Count > 3){
+                @if(Model.Listings.Count >= 3){
                     @for(var i=0;i<3;i++)
                     {
                          <div class="carousel-item-b swiper-slide">
@@ -86,7 +86,7 @@
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a href="property-single.html">@Model.Listings[i].ListingAddress.Neighborhood
+                        <a asp-controller="Listings" asp-action="Details" asp-route-id="@Model.Listings[i].Id">@Model.Listings[i].ListingAddress.Neighborhood
                           <br /> @Model.Listings[i].ListingAddress.Street</a>
                       </h2>
                     </div>
@@ -94,7 +94,7 @@
                       <div class="price-box d-flex">
                         <span class="price-a">@Model.Listings[i].PropertyType.Name | $ @Model.Listings[i].Price</span>
                       </div>
-                      <a href="#" class="link-a">Click here to view
+                      <a asp-controller="Listings" asp-action="Details" asp-route-id="@Model.Listings[i].Id"  class="link-a" >Click here to view
                         <span class="bi bi-chevron-right"></span>
                       </a>
                     </div>

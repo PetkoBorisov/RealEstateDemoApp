@@ -2,6 +2,7 @@
 {
     public class IndexModel
     {
+        public int Id { get; set; }
         public string? imgUrl {get; set;}
         public string? Country { get; set; }
 

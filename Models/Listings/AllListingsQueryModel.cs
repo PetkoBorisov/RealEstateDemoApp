@@ -6,6 +6,7 @@ namespace RealEstateDemoApp.Models.Listings
 {
     public class AllListingsQueryModel
     {
+        
         public AllListingsQueryModel()
         {
             this.IndoorFeatures = FeaturesFeeder.feedIndoorFeatures();
@@ -28,6 +29,8 @@ namespace RealEstateDemoApp.Models.Listings
         public string? City { get; set; }
         public int currentPage { get; set; }
         public double totalPages { get; set; }
+
+        public int SortingKey { get; set; }
         public Dictionary<string,string> queryDict { get; set; }
         public List<FeatureModel> IndoorFeatures { get; set; }
         public List<FeatureModel> OutdoorFeatures { get; set; }

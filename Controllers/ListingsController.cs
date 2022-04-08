@@ -121,7 +121,7 @@ namespace RealEstateDemoApp.Controllers
 
             var data = _listings.All(modelData.PriceFrom,modelData.PriceTo,modelData.Country,modelData.City,modelData.PropertyTypeId,
                 modelData.ListingTypeId,modelData.Status,modelData.Bedrooms,modelData.Bathrooms,modelData.CarSpaces,
-                indoors,outdoors,climate,modelData.LandSizeFrom,modelData.LandSizeTo,modelData.currentPage, AllListingsQueryModel.ItemsPerPage);
+                indoors,outdoors,climate,modelData.LandSizeFrom,modelData.LandSizeTo,modelData.currentPage, AllListingsQueryModel.ItemsPerPage,modelData.SortingKey);
             modelData.Listings = data.Listings;
 
              modelData.totalPages = Math.Ceiling((double)data.totalListings / AllListingsQueryModel.ItemsPerPage);

@@ -24,11 +24,11 @@ namespace RealEstateDemoApp.Controllers
             var climate = modelData.ClimateControl.Where(x => x.isSelected).Select(x => x.Value).ToList();
             var data = _listings.All(modelData.PriceFrom, modelData.PriceTo, modelData.Country, modelData.City, modelData.PropertyTypeId,
                 modelData.ListingTypeId, modelData.Status, modelData.Bedrooms, modelData.Bathrooms, modelData.CarSpaces,
-                indoors, outdoors, climate, modelData.LandSizeFrom, modelData.LandSizeTo,modelData.currentPage, AllListingsQueryModel.ItemsPerPage);
+                indoors, outdoors, climate, modelData.LandSizeFrom, modelData.LandSizeTo,modelData.currentPage, AllListingsQueryModel.ItemsPerPage,modelData.SortingKey);
             modelData.Listings = data.Listings;
 
 
-            if (data.Listings.Count > 3)
+            if (data.Listings.Count >= 3)
             {
                 List<IndexModel> viewModels = new List<IndexModel>();
                 for (var i = 0; i < 3; i++)
@@ -41,7 +41,8 @@ namespace RealEstateDemoApp.Controllers
                         Street = data.Listings[i].ListingAddress.Street,
                         PostCode = data.Listings[i].ListingAddress.PostCode,
                         Neighborhood = data.Listings[i].ListingAddress.Neighborhood,
-                        Price = data.Listings[i].Price
+                        Price = data.Listings[i].Price,
+                        Id = data.Listings[i].Id,
 
                     });
 

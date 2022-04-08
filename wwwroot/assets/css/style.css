@@ -862,6 +862,17 @@ a:hover {
   right: 4.2857rem;
 }
 
+
+.img-a {
+    width: 100%;
+    height: 35vw;
+    object-fit: cover;
+}
+
+
+
+
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -1061,6 +1072,7 @@ a:hover {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
 
 .card-box-a .img-a,
 .card-box-a .img-b,
