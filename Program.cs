@@ -15,10 +15,15 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => {
     options.SignIn.RequireConfirmedAccount = false;
-   
+    
 
 })
     .AddEntityFrameworkStores<RealEstateDbContext>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/User/Login";
+});
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IListingService, ListingService>();
 builder.Services.AddTransient<IAddressService, AddressService>();
@@ -45,6 +50,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",

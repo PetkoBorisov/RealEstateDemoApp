@@ -13,11 +13,7 @@ namespace RealEstateDemoApp.Models.Listings
             this.IndoorFeatures = FeaturesFeeder.feedIndoorFeatures();
 
             this.ClimateControl = FeaturesFeeder.feedClimateFeatures();
-
-
-
-
-            
+    
         }
        
         public int PropertyTypeId { get; set; }

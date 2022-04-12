@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RealEstateDemoApp.Data;
 using RealEstateDemoApp.Data.Models;
+using System.Linq;
 
 namespace RealEstateDemoApp.Services.Listings
 {
@@ -37,10 +38,29 @@ namespace RealEstateDemoApp.Services.Listings
         {   
             var modelData = new ListingsQueryServiceModel();
             var data = _data.Listings.Include(x => x.ListingAddress).Include(x=>x.Images).Include(x=>x.PropertyType).Include(x=>x.ListingType).ToList();
-           
-            
 
-            if(priceFrom != 0)
+            if (sortingKey == 1)
+            {
+                data = data.OrderBy(x => x.Price).ToList();
+            }
+            else
+          if (sortingKey == 2)
+            {
+                data = data.OrderByDescending(x => x.Price).ToList();
+            }
+            else
+          if (sortingKey == 3)
+            {
+                //sort by date
+            }
+            else
+          if (sortingKey == 4)
+            {
+               //sort by date
+            }
+
+
+            if (priceFrom != 0)
             {
                 data = data.Where(x => x.Price >= priceFrom).ToList();
 
@@ -137,25 +157,7 @@ namespace RealEstateDemoApp.Services.Listings
                .Take(itemsPerPage).ToList();
 
 
-            if(sortingKey == 1)
-            {
-                data = data.OrderBy(x=>x.Price).ToList();
-            }
-            else
-            if (sortingKey == 2)
-            {
-                data = data.OrderByDescending(x => x.Price).ToList();
-            }
-            else 
-            if(sortingKey == 3)
-            {
-                data = data.Where(x => x.ListingType.Name == "Rent").ToList();
-            }
-            else
-            if (sortingKey == 4)
-            {
-                data = data.OrderBy(x => x.ListingType.Name == "Sale").ToList();
-            }
+          
 
 
             modelData.Listings = data;
@@ -204,5 +206,65 @@ namespace RealEstateDemoApp.Services.Listings
             this._data.SaveChanges();
             return data.Id;
         }
+
+
+
+        public void Update(int id,int listingAddressId, decimal price,
+            int propertyTypeId, string outdoorFeatures, string indoorFeatures,
+            string climateControl, string status, string description, int bedrooms,
+            int bathrooms, int listingTypeId, int carSpaces,
+            int landSize, List<string> imageUrls)
+        {
+
+            var listing = GetById(id);
+            List<ListingImage> images = new();
+            if (imageUrls.Any())
+            {
+                foreach (var url in imageUrls)
+                {
+                    images.Add(new ListingImage
+                    {
+                        Url = url,
+                    });
+
+                }
+            }
+
+
+
+
+
+
+            listing.ListingAddressId = listingAddressId;
+            listing.Price = price;
+            listing.PropertyTypeId = propertyTypeId;
+            listing.OutdoorFeatures = outdoorFeatures;
+            listing.IndoorFeatures = indoorFeatures;
+            listing.ClimateControl = climateControl;
+            listing.Status = status;
+            listing.Bedrooms = bedrooms;
+            listing.Bathrooms = bathrooms;
+            listing.ListingTypeId = listingTypeId;
+            listing.CarSpaces = carSpaces;
+            listing.LandSize = landSize;
+            listing.Images = images;
+            listing.Description = description;
+            
+
+            
+            _data.SaveChanges();
+
+
+        }
+
+
+
+        public void Delete(int id)
+        {
+            var listing = GetById(id);
+            _data.Remove(listing);
+            _data.SaveChanges(true);
+        }
+
     }
 }

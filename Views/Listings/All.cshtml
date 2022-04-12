@@ -46,17 +46,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <div class="grid-option">
-              <form>
-                <select class="custom-select" id="SortingSelect" asp-for="SortingKey" asp-action="All" asp-controller="Listings" >
-                  <option value="0" selected>All</option>
-                  <option value="1">Cheapest First</option>
-                  <option value="2">Most-Expensive First</option>
-                  <option value="3">Rent</option>
-                   <option value="4">Sale</option>
-                </select>
-              </form>
-            </div>
+           
           </div>
           @foreach(var listing in Model.Listings){
                  <div class="col-md-4">
@@ -81,6 +71,18 @@
                     <a asp-controller="Listings" asp-action="Details" asp-route-id="@listing.Id" class="link-a">Click here to view
                       <span class="bi bi-chevron-right"></span>
                     </a>
+
+                 
+                    @if(ViewBag.Id != null && ViewBag.Id == listing.OwnerId){
+                        <br>
+                     <a asp-controller="Listings" asp-action="Edit" asp-route-id="@listing.Id" class="link-a">Edit this listing
+                      <span class="bi bi-chevron-right"></span>
+                    </a>
+                     <br>
+                     <a asp-controller="Listings" asp-action="Delete" asp-route-id="@listing.Id" class="link-a">Delete this listing
+                      <span class="bi bi-chevron-right"></span>
+                    </a>
+                    }
                   </div>
                   <div class="card-footer-a">
                     <ul class="card-info d-flex justify-content-around">

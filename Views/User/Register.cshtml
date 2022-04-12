@@ -8,8 +8,9 @@
 <section class="intro-single">
      
 <form class = "w-25 mx-auto" asp-action="Register" asp-controller="User" method="post"> 
+    
     <div class="container align-content-center">
-
+         <div asp-validation-summary="All"></div> 
         <!-- Email input -->
   <div class="form-outline mb-4">
     <input asp-for="Email" type="email" id="form2Example1" class="form-control" />
