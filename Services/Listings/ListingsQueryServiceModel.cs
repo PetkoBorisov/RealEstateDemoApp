@@ -8,6 +8,6 @@ namespace RealEstateDemoApp.Services.Listings
 
         public int totalListings { get; set; }
 
-        public List<Listing> Listings { get; set; }
+        public List<ListingServiceModel> Listings { get; set; }
     }
 }

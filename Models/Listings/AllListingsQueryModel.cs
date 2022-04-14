@@ -1,12 +1,13 @@
 ﻿
 using RealEstateDemoApp.Data.Models;
 using RealEstateDemoApp.Models.Features;
+using RealEstateDemoApp.Services.Listings;
 
 namespace RealEstateDemoApp.Models.Listings
 {
     public class AllListingsQueryModel
     {
-        
+
         public AllListingsQueryModel()
         {
             this.IndoorFeatures = FeaturesFeeder.feedIndoorFeatures();
@@ -31,12 +32,13 @@ namespace RealEstateDemoApp.Models.Listings
         public double totalPages { get; set; }
 
         public int SortingKey { get; set; }
-        public Dictionary<string,string> queryDict { get; set; }
+        public Dictionary<string, string> queryDict { get; set; }
+       
         public List<FeatureModel> IndoorFeatures { get; set; }
         public List<FeatureModel> OutdoorFeatures { get; set; }
         public List<FeatureModel> ClimateControl { get; set; }
 
         public List<IndexModel> cauroselItems  { get; set; }
-        public List<Listing> Listings { get; set; }
+        public List<ListingServiceModel> Listings { get; set; }
     }
 }

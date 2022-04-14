@@ -78,7 +78,7 @@
                         {
                             <div class="form-check form-check-inline">
                                 <input asp-for="@Model.OutdoorFeatures[i].Value" type="hidden" value="@Model.OutdoorFeatures[i].Value">
-                                <input asp-for="@Model.OutdoorFeatures[i].isSelected" type="checkbox" class="form-check-input" >
+                                <input asp-for="@Model.OutdoorFeatures[i].isSelected" value="true" type="checkbox" class="form-check-input" >
                                 <label asp-for="@Model.OutdoorFeatures[i].isSelected" class="form-check-label" >@Model.OutdoorFeatures[i].Value</label>
                             </div>
                         }
@@ -94,7 +94,7 @@
                         {   
                           <div class="form-check form-check-inline">
                              <input asp-for="@Model.IndoorFeatures[i].Value" type="hidden" value="@Model.IndoorFeatures[i].Value">
-                            <input asp-for="@Model.IndoorFeatures[i].isSelected" type="checkbox" class="form-check-input" >
+                            <input asp-for="@Model.IndoorFeatures[i].isSelected" value="true" type="checkbox" class="form-check-input" >
                             <label asp-for="@Model.IndoorFeatures[i].isSelected" class="form-check-label" >@Model.IndoorFeatures[i].Value</label>
                             </div>  
                         }
@@ -111,7 +111,7 @@
       
                       <div class="form-check form-check-inline">
                             <input asp-for="@Model.ClimateControl[i].Value" type="hidden" value="@Model.ClimateControl[i].Value">
-                        <input asp-for="@Model.ClimateControl[i].isSelected" type="checkbox" class="form-check-input" >
+                        <input asp-for="@Model.ClimateControl[i].isSelected" value="true"  type="checkbox" class="form-check-input" >
                         <label asp-for="@Model.ClimateControl[i].isSelected" class="form-check-label" >@Model.ClimateControl[i].Value</label>
                         </div>  
 

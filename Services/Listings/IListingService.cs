@@ -22,7 +22,7 @@ namespace RealEstateDemoApp.Services.Listings
             List<string> imageUrls
             );
 
-        void Update(int id,
+        int Update(int id,
             int listingAddressId,
             decimal price,
             int propertyTypeId,
@@ -39,14 +39,14 @@ namespace RealEstateDemoApp.Services.Listings
             List<string> imageUrls
             );
 
-        void Delete(int id);
+        int Delete(int id);
 
         ListingsQueryServiceModel All(decimal priceFrom,decimal priceTo,string country,string city,int propertyTypeId,int listingTypeId
             , string status, int bedrooms, int bathrooms, int carSpaces
             , List<string> indoorFeatures, List<string> outdoorFeatures, List<string> climateControl,int landSizeFrom, int landSizeTo,
             int currentPage,int itemsPerPage,int sortingKey);
 
-        List<Listing> All();
+        ListingsQueryServiceModel All();
 
         Listing GetById(int id);
 

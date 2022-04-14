@@ -89,6 +89,7 @@ namespace RealEstateDemoApp.Controllers
 
             return RedirectToAction("All", "Listings");
         }
+        
 
 
         public IActionResult All([FromQuery] AllListingsQueryModel modelData)
@@ -100,10 +101,18 @@ namespace RealEstateDemoApp.Controllers
 
 
             var dict = new Dictionary<string, string>();
-            foreach (var param in this.Request.Query)
+            this.Request.Query.ToList().ForEach(x => dict.Add(x.Key, x.Value));
+
+        
+            foreach (var param in dict)
             {
-                dict[param.Key] = param.Value.ToString();
+                if (param.Value == "true,false")
+                {
+                    dict[param.Key] = "true";
+                }
+
             }
+
             modelData.queryDict = dict;
 
 

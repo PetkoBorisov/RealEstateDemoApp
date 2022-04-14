@@ -14,10 +14,48 @@ namespace RealEstateDemoApp.Services.Listings
             this._data = data;
         }
 
-        public List<Listing> All()
+        public ListingsQueryServiceModel All()
         {
+            var data =  _data.Listings
+                .Include(x => x.ListingAddress)
+                .Include(x => x.Images)
+                .Include(x => x.PropertyType)
+                .Include(x => x.ListingType)
+                .ToList();
+            ListingsQueryServiceModel dataModel = new ListingsQueryServiceModel {
 
-            return _data.Listings.Include(x => x.ListingAddress).Include(x => x.Images).Include(x => x.PropertyType).Include(x => x.ListingType).ToList();
+                Listings = data.Select(x => new ListingServiceModel
+                {
+                    Country = x.ListingAddress.Country,
+                    City = x.ListingAddress.City,
+                    Street = x.ListingAddress.Street,
+                    Neighborhood = x.ListingAddress.Neighborhood,
+                    PostCode = x.ListingAddress.PostCode,
+                    Flat = x.ListingAddress.Flat,
+                    Entrance = x.ListingAddress.Entrance,
+                    AllFloor = x.ListingAddress.AllFloor,
+                    Floor = x.ListingAddress.Floor,
+                    Id = x.ListingAddress.Id,
+                    OwnerId = x.OwnerId,
+                    Price = x.Price,
+                    PropertyType = x.PropertyType.Name,
+                    ListingType = x.ListingType.Name,
+                    IndoorFeatures = x.IndoorFeatures,
+                    OutdoorFeatures = x.OutdoorFeatures,
+                    ClimateControl = x.ClimateControl,
+                    Description = x.Description,
+                    Status = x.Status,
+                    Bathrooms = x.Bathrooms,
+                    Bedrooms = x.Bedrooms,
+                    CarSpaces = x.CarSpaces,
+                    LandSize = x.LandSize,
+                    Images = String.Join(",",x.Images.Select(x=>x.Url)),
+
+                }).ToList(),
+               totalListings = data.Count,
+
+            };
+            return dataModel;
         }
 
         public Listing GetById(int id)
@@ -157,10 +195,37 @@ namespace RealEstateDemoApp.Services.Listings
                .Take(itemsPerPage).ToList();
 
 
-          
 
 
-            modelData.Listings = data;
+
+            modelData.Listings = data.Select(x =>  new ListingServiceModel{
+                Country = x.ListingAddress.Country,
+                City = x.ListingAddress.City,
+                Street = x.ListingAddress.Street,
+                Neighborhood = x.ListingAddress.Neighborhood,
+                PostCode = x.ListingAddress.PostCode,
+                Flat = x.ListingAddress.Flat,
+                Entrance = x.ListingAddress.Entrance,
+                AllFloor = x.ListingAddress.AllFloor,
+                Floor = x.ListingAddress.Floor,
+                Id = x.Id,
+                OwnerId = x.OwnerId,
+                Price = x.Price,
+                PropertyType = x.PropertyType.Name,
+                ListingType = x.ListingType.Name,
+                IndoorFeatures = x.IndoorFeatures,
+                OutdoorFeatures = x.OutdoorFeatures,
+                ClimateControl = x.ClimateControl,
+                Description = x.Description,
+                Status = x.Status,
+                Bathrooms = x.Bathrooms,
+                Bedrooms = x.Bedrooms,
+                CarSpaces = x.CarSpaces,
+                LandSize = x.LandSize,
+                Images = String.Join(",", x.Images.Select(x => x.Url)),
+                
+
+            }).ToList(); 
 
             return modelData;
         }
@@ -209,7 +274,7 @@ namespace RealEstateDemoApp.Services.Listings
 
 
 
-        public void Update(int id,int listingAddressId, decimal price,
+        public int Update(int id,int listingAddressId, decimal price,
             int propertyTypeId, string outdoorFeatures, string indoorFeatures,
             string climateControl, string status, string description, int bedrooms,
             int bathrooms, int listingTypeId, int carSpaces,
@@ -252,18 +317,18 @@ namespace RealEstateDemoApp.Services.Listings
             
 
             
-            _data.SaveChanges();
+            return _data.SaveChanges();
 
 
         }
 
 
 
-        public void Delete(int id)
+        public int Delete(int id)
         {
             var listing = GetById(id);
             _data.Remove(listing);
-            _data.SaveChanges(true);
+            return _data.SaveChanges();
         }
 
     }

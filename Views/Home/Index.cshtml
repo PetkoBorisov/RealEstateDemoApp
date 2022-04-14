@@ -80,19 +80,19 @@
                          <div class="carousel-item-b swiper-slide">
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
-                  <img src="@Model.Listings[i].Images.FirstOrDefault().Url" alt="" class="img-a img-fluid">
+                  <img src="@Model.Listings[i].Images.Split(',',StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()" alt="" class="img-a img-fluid">
                 </div>
                 <div class="card-overlay">
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a asp-controller="Listings" asp-action="Details" asp-route-id="@Model.Listings[i].Id">@Model.Listings[i].ListingAddress.Neighborhood
-                          <br /> @Model.Listings[i].ListingAddress.Street</a>
+                        <a asp-controller="Listings" asp-action="Details" asp-route-id="@Model.Listings[i].Id">@Model.Listings[i].Neighborhood
+                          <br /> @Model.Listings[i].Street</a>
                       </h2>
                     </div>
                     <div class="card-body-a">
                       <div class="price-box d-flex">
-                        <span class="price-a">@Model.Listings[i].PropertyType.Name | $ @Model.Listings[i].Price</span>
+                        <span class="price-a">@Model.Listings[i].PropertyType | $ @Model.Listings[i].Price</span>
                       </div>
                       <a asp-controller="Listings" asp-action="Details" asp-route-id="@Model.Listings[i].Id"  class="link-a" >Click here to view
                         <span class="bi bi-chevron-right"></span>

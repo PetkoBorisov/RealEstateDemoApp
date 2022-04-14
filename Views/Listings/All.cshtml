@@ -53,20 +53,20 @@
             <div class="card-box-a img-a card-shadow">
               <div class="img-box-a">
                   
-                <img src="@listing.Images.FirstOrDefault().Url" alt="" class="img-a img-fluid">
+                <img src="@listing.Images.Split(',',StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()" alt="" class="img-a img-fluid">
                 
               </div>
               <div class="card-overlay">
                 <div class="card-overlay-a-content">
                   <div class="card-header-a">
                     <h2 class="card-title-a">
-                      <a asp-controller="Listings" asp-action="Details" asp-route-id="@listing.Id">@listing.ListingAddress.Neighborhood
-                        <br /> @listing.ListingAddress.Street</a>
+                      <a asp-controller="Listings" asp-action="Details" asp-route-id="@listing.Id">@listing.Neighborhood
+                        <br /> @listing.Street</a>
                     </h2>
                   </div>
                   <div class="card-body-a">
                     <div class="price-box d-flex">
-                      <span class="price-a">@listing.PropertyType.Name | $ @listing.Price</span>
+                      <span class="price-a">@listing.PropertyType | $ @listing.Price</span>
                     </div>
                     <a asp-controller="Listings" asp-action="Details" asp-route-id="@listing.Id" class="link-a">Click here to view
                       <span class="bi bi-chevron-right"></span>
@@ -135,6 +135,7 @@
                   asp-action="All" 
                   asp-controller="Listings" 
                   asp-all-route-data="@(Model.queryDict)" 
+                  
                   asp-route-currentPage="@(prevPage)" >
                     <span class="bi bi-chevron-left"></span>
                   </a>
@@ -153,8 +154,9 @@
                   <a class="page-link"  tabindex="-1"  
                   asp-action="All" 
                   asp-controller="Listings" 
-                  asp-all-route-data="@(Model.queryDict)" 
-                  asp-route-currentPage="@(nextPage)" >
+                  asp-all-route-data="@(Model.queryDict)"  
+                  asp-route-currentPage="@(nextPage)"
+                    >
                     <span class="bi bi-chevron-right"></span>
                   </a>
                 </li>
