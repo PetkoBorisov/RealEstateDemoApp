@@ -102,8 +102,7 @@ namespace RealEstateDemoApp.Controllers
 
             var dict = new Dictionary<string, string>();
             this.Request.Query.ToList().ForEach(x => dict.Add(x.Key, x.Value));
-
-        
+            //Strange ???? Check later pleaseee!!!
             foreach (var param in dict)
             {
                 if (param.Value == "true,false")

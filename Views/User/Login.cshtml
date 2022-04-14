@@ -10,6 +10,11 @@
 <form class = "w-25 mx-auto" asp-action="Login" asp-controller="User" method="post">
      <div asp-validation-summary="All"></div> 
     <div class="container align-content-center">
+         <!-- Username input -->
+
+    <input  asp-for="UserName" type="hidden" value="test" class="form-control" />
+  
+
   <!-- Email input -->
   <div class="form-outline mb-4">
     <input asp-for="Email" type="Email"  class="form-control" />
