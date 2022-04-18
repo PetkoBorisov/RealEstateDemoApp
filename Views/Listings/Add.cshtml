@@ -11,13 +11,13 @@
     <div class="col-sm">
       @*First Col*@
        <select asp-for="PropertyTypeId" class="form-select" aria-label="Select property type">
-  <option selected>Select property type</option>
+  <option selected value="0">Select property type</option>
   <option value="1">House</option>
   <option value="2">Flat</option>
 </select>
  <hr>
 <select asp-for="ListingTypeId" class="form-select" aria-label="Select listing type">
-  <option selected>Select listing type</option>
+  <option selected  value="0">Select listing type</option>
   <option value="1">Rent</option>
   <option value="2">Sell</option>
 </select>
@@ -166,6 +166,7 @@
   
   <br>
   <br>
+    <div asp-validation-summary="All"></div> 
   <button type="submit" class="btn btn-primary">Submit</button>
   
     </div>

@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using RealEstateDemoApp.Models.Features;
+using System.Net.Mail;
+using System.Net;
 using RealEstateDemoApp.Models.Listings;
 using RealEstateDemoApp.Services.Addresses;
 using RealEstateDemoApp.Services.Listings;
 
-using System.Linq;
 using System.Security.Claims;
+using RealEstateDemoApp.Models.Emails;
 
 namespace RealEstateDemoApp.Controllers
 {
@@ -65,29 +67,48 @@ namespace RealEstateDemoApp.Controllers
             return View(modelData);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DetailsAsync(DetailsListingModel modelData)
+        {
+            var client = new SmtpClient("smtp.mailtrap.io", 2525)
+            {
+                Credentials = new NetworkCredential("26e2781fbf00b2", "cac67f160785fd"),
+                EnableSsl = true
+            };
+            var user = await _user.GetUserAsync(this.User);
+            modelData.From = user.Email;
+            client.Send(modelData.From, modelData.To, modelData.Title, modelData.Body);
+            return RedirectToAction("All", "Listings");
+        }
 
-
-
+        [Authorize]
         [HttpPost]
         public IActionResult Add(ListingFormModel data)
         {
-            var test = data.IndoorFeatures.Where(x => x.isSelected).ToList();
-            var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (ModelState.IsValid)
+            {
+                var test = data.IndoorFeatures.Where(x => x.isSelected).ToList();
+                var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var images = data.Images.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList();
-            var indoors = String.Join(",", data.IndoorFeatures.Where(x => x.isSelected).Select(x => x.Value).ToArray());
-            var outdoors = String.Join(",", data.OutdoorFeatures.Where(x => x.isSelected).Select(x => x.Value).ToArray());
-            var climate = String.Join(",", data.ClimateControl.Where(x => x.isSelected).Select(x => x.Value).ToArray());
-            var listingAddressId = this._address.Create(data.Country, data.City, data.Street, data.PostCode, data.Neighborhood
-                , data.Entrance, data.Flat, data.AllFloors, data.Floor);
+                var images = data.Images.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList();
+                var indoors = String.Join(",", data.IndoorFeatures.Where(x => x.isSelected).Select(x => x.Value).ToArray());
+                var outdoors = String.Join(",", data.OutdoorFeatures.Where(x => x.isSelected).Select(x => x.Value).ToArray());
+                var climate = String.Join(",", data.ClimateControl.Where(x => x.isSelected).Select(x => x.Value).ToArray());
+                var listingAddressId = this._address.Create(data.Country, data.City, data.Street, data.PostCode, data.Neighborhood
+                    , data.Entrance, data.Flat, data.AllFloors, data.Floor);
 
-            var listingId = this._listings.Create(ownerId, listingAddressId, data.Price, data.PropertyTypeId,
-                outdoors, indoors, climate, data.Status, data.Description, data.Bedrooms, data.Bathrooms, data.ListingTypeId,
-                data.CarSpaces, data.LandSize, images);
+                var listingId = this._listings.Create(ownerId, listingAddressId, data.Price, data.PropertyTypeId,
+                    outdoors, indoors, climate, data.Status, data.Description, data.Bedrooms, data.Bathrooms, data.ListingTypeId,
+                    data.CarSpaces, data.LandSize, images);
 
 
 
-            return RedirectToAction("All", "Listings");
+                return RedirectToAction("All", "Listings");
+            }
+            else
+            {
+                return View(data);
+            }
         }
         
 

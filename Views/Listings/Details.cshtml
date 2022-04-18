@@ -1,4 +1,5 @@
-﻿@*
+﻿
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -247,21 +248,18 @@
               </div>
               <div class="col-md-12 col-lg-4">
                 <div class="property-contact">
-                  <form class="form-a">
-                    <div class="row">
-                      <div class="col-md-12 mb-1">
+                  
+                  <form class="form-a" asp-action="Details" asp-controller="Listings" method="post">
+                    <div class="row">  
+                      <div class="col-md-12 mb-1"> 
+                          <input type="email" asp-for="To" value="@Model.Email" hidden>
                         <div class="form-group">
-                          <input type="text" class="form-control form-control-lg form-control-a" id="inputName" placeholder="Name *" required>
+                          <input type="text" asp-for="Title" class="form-control form-control-lg form-control-a" id="inputEmail1" placeholder="Title *" required>
                         </div>
                       </div>
                       <div class="col-md-12 mb-1">
                         <div class="form-group">
-                          <input type="email" class="form-control form-control-lg form-control-a" id="inputEmail1" placeholder="Email *" required>
-                        </div>
-                      </div>
-                      <div class="col-md-12 mb-1">
-                        <div class="form-group">
-                          <textarea id="textMessage" class="form-control" placeholder="Comment *" name="message" cols="45" rows="8" required></textarea>
+                          <textarea asp-for="Body" class="form-control" placeholder="Comment *"  cols="45" rows="8" required></textarea>
                         </div>
                       </div>
                       <div class="col-md-12 mt-3">

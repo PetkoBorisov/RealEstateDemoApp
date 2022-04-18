@@ -32,7 +32,15 @@
         public string? PhoneNumber { get; set; }
         public string? Email { get; set; }
         public string? UserName { get; set; }
-      
+
+
+
+        //put these in seperate model
+        public string? From { get; set; }
+        public string? To { get; set; }
+        public string? Title { get; set; }
+        public string? Body { get; set; }
+
 
         public List<string> OutdoorFeatures { get; set; }
         public List<string> IndoorFeatures { get; set; }
